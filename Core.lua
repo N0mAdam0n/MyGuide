@@ -1,0 +1,1 @@
+print("MyGuide 加载成功")

@@ -1,0 +1,9 @@
+## Interface: 16001
+## Title: MyGuide
+## Notes: 傻瓜升级向导
+## Author: NomAdamon
+## Version: 0.0.1
+
+## Saved Variables PerCharacter: MyGuideCharDB
+Core.lua
+
