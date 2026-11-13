@@ -3,7 +3,8 @@
 ## Notes: 傻瓜升级向导
 ## Author: NomAdamon
 ## Version: 0.0.1
+## SavedVariablesPerCharacter: MyGuideCharDB
 
-## Saved Variables PerCharacter: MyGuideCharDB
+
 Core.lua
 

@@ -48,8 +48,8 @@ function ns.Fire(name, ...)
     end
 end
 
-local DEFAULTS = {currentSttep = 1}--#存档初始化
-ns.RegiserEvent("ADDON_LOADED", function(event. name)
+local DEFAULTS = {currentStep = 1}--#存档初始化
+ns.RegisterEvent("ADDON_LOADED", function(event, name)
     if name ~= addonName then
         return
     end
@@ -76,7 +76,7 @@ function ns.SetStep(n)--#region步骤与订阅示例
     ns.Fire("STEP_CHANGED",n)
 end
 
-ns.Listen("STEP_CHANGER", function(n)
+ns.Listen("STEP_CHANGED", function(n)
     ns.Print("当前步骤："..n)
 end)
 
@@ -120,6 +120,6 @@ SlashCmdList["MYGUIDE"] = function(msg)
     if fn then
         fn(arg)
     else
-        comands.help() 
+        commands.help() 
     end
 end
