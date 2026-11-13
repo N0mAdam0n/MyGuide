@@ -49,7 +49,7 @@ function ns.Fire(name, ...)
 end
 
 local DEFAULTS = {currentStep = 1}--#存档初始化
-ns.RegiserEvent("ADDON_LOADED", function(event， name)
+ns.RegiserEvent("ADDON_LOADED", function(event, name)
     if name ~= addonName then
         return
     end
