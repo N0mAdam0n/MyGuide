@@ -64,6 +64,62 @@ ns.RegiserEvent("ADDON_LOADED", function(event. name)
     ns.db = MyGuideCharDB
 end)
 
-ns.RegisterEvent("PLAYER_LOGIN", function(event)--#region角色进入世界是触发
+ns.RegisterEvent("PLAYER_LOGIN", function(event)--#region角色进入世界时触发
     ns.Print("已加载，输入 /mg help 查看命令")
 end)
+
+function ns.SetStep(n)--#region步骤与订阅示例
+    if n <1 then
+        n = 1
+    end
+    ns.db.currentStep = n 
+    ns.Fire("STEP_CHANGED",n)
+end
+
+ns.Listen("STEP_CHANGER", function(n)
+    ns.Print("当前步骤："..n)
+end)
+
+ns.RegisterEvent("PLAYER_LEVEL_UP", function(event, newLevel)
+    ns.Print("你升到了" .. tostring(newLevel) .. "级")
+end)
+
+local commands = {}--#region显示命令
+commands.help = function()
+    ns.Print("命令：")
+    print(" /mg next    下一步")
+     print(" /mg prev    上一步")
+      print(" /mg step N    跳转到第N步")
+       print(" /mg status    查看当前存档")
+        print(" /mg reset    回到第1步")
+end
+
+commands.next = function() ns.SetStep(ns.db.currentStep + 1) end
+commands.prev = function() ns.SetStep(ns.db.currentStep - 1) end
+commands.reset = function() ns.SetStep(1) end
+
+commands.step = function(arg)
+    local n = tonumber(arg)
+    if n then
+        ns.SetStep(n)
+    else
+        ns.Print("用法：/mg step 5")
+    end
+end
+
+commands.status = function()
+    ns.Print("当前步骤" .. ns.db.currentStep)
+end
+
+SLASH_MYGUIDE1 = "/myguide"
+SLASH_MYGUIDE2 = "/mg"
+
+SlashCmdList["MYGUIDE"] = function(msg)
+    local cmd, arg = msg:lower():match("^(%S*)%s*(.-)$")
+    local fn = commands[cmd]
+    if fn then
+        fn(arg)
+    else
+        comands.help() 
+    end
+end
