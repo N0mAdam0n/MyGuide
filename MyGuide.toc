@@ -5,5 +5,7 @@
 ## Version: 0.0.1
 
 ## Saved Variables PerCharacter: MyGuideCharDB
+
+
 Core.lua
 
